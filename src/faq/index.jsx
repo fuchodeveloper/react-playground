@@ -15,28 +15,59 @@ class FAQ extends Component {
 
   /* handling passing parameter: using arrow function */
 
+  // constructor(props) {
+  //   super(props);
+  //   this.handleClick = this.handleClick.bind(this);
+  //   this.state = {
+  //     justClicked: null,
+  //     letters: Array.from({length: 26}, (_, i) => String.fromCharCode(A + i))
+  //   }
+  // }
+
+  // handleClick(letter) {
+  //   this.setState({ justClicked: letter });
+  // }
+
+  // render() {
+  //   const { justClicked, letters } = this.state;
+  //   return (
+  //     <div>
+  //       Just clicked: {justClicked}
+  //       <ul>
+  //         {
+  //           letters.map(letter => 
+  //             <li key={letter} onClick={() => this.handleClick(letter)}>{letter}</li>
+  //           )
+  //         }
+  //       </ul>
+  //     </div>
+  //   )
+  // }
+
+  /* handling passing parameter: using data-attributes */
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
       justClicked: null,
       letters: Array.from({length: 26}, (_, i) => String.fromCharCode(A + i))
-    }
+    };
   }
 
-  handleClick(letter) {
-    this.setState({ justClicked: letter });
+  handleClick(e) {
+    this.setState({
+      justClicked: e.target.dataset.letter
+    });
   }
 
   render() {
-    const { justClicked, letters } = this.state;
     return (
       <div>
-        Just clicked: {justClicked}
+        Just clicked: {this.state.justClicked}
         <ul>
           {
-            letters.map(letter => 
-              <li key={letter} onClick={() => this.handleClick(letter)}>{letter}</li>
+            this.state.letters.map(letter =>
+              <li></li>
             )
           }
         </ul>
