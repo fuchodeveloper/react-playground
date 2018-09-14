@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 
-class Clock extends Component {
+class Clock1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,17 +11,14 @@ class Clock extends Component {
   }
 
   componentDidMount() {
-    fetch('https://api.github.com/users/octocat/orgs')
-    .then((response) => {
-      console.log('response', response)
-    })
-    .then((error) => {
-      console.log('error', error)
-    })
     this.timerId = setInterval(() => this.tick(), 1000);
   }
 
-  componentWillMount() {
+  componentDidUpdate(prevProps, nextProps) {
+    console.log('prevProps', prevProps, 'next', nextProps)
+  }
+
+  componentWillUnmount() {
     clearInterval(this.timerId);
   }
 
@@ -37,6 +34,16 @@ class Clock extends Component {
       </div>
     );
   }
+}
+
+const Clock = () => {
+  return (
+    <div>
+      <Clock1 />
+      <Clock1 />
+      <Clock1 />
+    </div>
+  )
 }
 
 export default Clock;
