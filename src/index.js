@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Clock from './App';
+import App from './App';
 
 class Board extends React.Component {
   renderSquare(i) {
@@ -145,7 +145,7 @@ class Game extends React.Component {
 // ========================================
 
 ReactDOM.render(
-  <Clock />,
+  <App />,
   // <Game />,
   document.getElementById('root')
 );
