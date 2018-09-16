@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './r-conditional-rendering/App';
+// import App from './r-conditional-rendering/App';
+import App from './App';
 
 class Board extends React.Component {
   renderSquare(i) {
@@ -144,8 +145,10 @@ class Game extends React.Component {
 
 // ========================================
 
+const messages = ['React', 'Re: React', 'Re: Re: React'];
+
 ReactDOM.render(
-  <App />,
+  <App unreadMessages={messages} />,
   // <Game />,
   document.getElementById('root')
 );
