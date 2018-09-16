@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './r-conditional-rendering/App';
 
 class Board extends React.Component {
   renderSquare(i) {
