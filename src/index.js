@@ -145,10 +145,10 @@ class Game extends React.Component {
 
 // ========================================
 
-const messages = ['React', 'Re: React', 'Re: Re: React'];
+const numbers = [1, 2, 3, 4, 5];
 
 ReactDOM.render(
-  <App />,
+  <App numbers={numbers} />,
   // <Game />,
   document.getElementById('root')
 );
