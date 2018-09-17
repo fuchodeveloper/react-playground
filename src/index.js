@@ -148,7 +148,7 @@ class Game extends React.Component {
 const messages = ['React', 'Re: React', 'Re: Re: React'];
 
 ReactDOM.render(
-  <App unreadMessages={messages} />,
+  <App />,
   // <Game />,
   document.getElementById('root')
 );
