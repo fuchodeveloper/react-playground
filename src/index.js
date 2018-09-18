@@ -1,42 +1,42 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './r-conditional-rendering/App';
 import App from './App';
 
-const Blog = props => {
-  const sidebar = (
-    <ul>
-      {
-        props.posts.map(post => 
-          <li key={post.id}>{post.title}</li>
-        )
-      }
-    </ul>
-  );
+class NameForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''}
+  }
 
-  const content = props.posts.map(post => 
-    <div key={post.id}>
-      <h3>{post.title}</h3>
-      <p>{post.content}</p>
-    </div>
-  );
-  return (
-    <div>
-      {sidebar}
-      <hr />
-      {content}
-    </div>
-  )
+
+  handleChange = event => {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit = event => {
+    console.log(`Value: ${this.state.value}`)
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name: <input
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    )
+  }
+
 }
-
-const posts = [
-  {id: 1, title: 'hello world', content: 'learning react'},
-  {id: 2, title: 'inspiration', content: 'be better than yesterday'}
-]
-
 ReactDOM.render(
-  <Blog posts={posts}/>,
-  // <Game />,
+  <NameForm/>,
   document.getElementById('root')
 );
