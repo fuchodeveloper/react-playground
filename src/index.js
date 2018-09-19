@@ -5,59 +5,52 @@ import './index.css';
 import App from './App';
 
 
-class EassyForm extends Component {
+class Reservation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'Essay about fav DOM element',
-      selectValue: 'coconut'
-    };
+      isGoing: true,
+      numberOfGuests: 2,
+    }
   }
 
-  handleChange = event => {
-    this.setState({[event.target.name]: event.target.value});
-  }
-
-  handleSubmit = event => {
-    console.log(`Submission: ${this.state.value} | Fav: ${this.state.selectValue}`);
-    event.preventDefault();
+  handleInputChange = event => {
+    const {
+      target, name, type, checked
+    } = event;
+    const value = type === 'checkbox' 
+      ? checked
+      : target.value;
+    this.setState({ [name]: value });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-      <label>
-        Favorite color:
-        <select
-          multiple={true}
-          name="selectValue"
-          value={[this.state.selectValue]}
-          onChange={this.handleChange}
-        >
-          <option value="grapefruit">Grape fruit</option>
-          <option value="lime">Lime</option>
-          <option value="coconut">Coconut</option>
-          <option value="mango">Mango</option>
-        </select>
-      </label>
-      <br /> <br />
-      <label>
-        Essay: 
-        <textarea
-          name="value"
-          value={this.state.value}
-          onChange={this.handleChange}
+      <form>
+        <label htmlFor="isGoing">
+        Is going: <input 
+          name="isGoing"
+          type="checkbox"
+          checked={this.state.isGoing}
+          onChange={this.handleInputChange}
         />
-      </label>
-      <br />
-      <input type="submit" value="Submit" />
-      <br />
+        </label>
+        <br/>
+        <label htmlFor="numberOfGuests">
+          Number of guests:
+          <input
+            name="numberOfGuests"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange}
+          />
+        </label>
       </form>
     )
   }
 }
 
 ReactDOM.render(
-  <EassyForm />,
+  <Reservation />,
   document.getElementById('root')
 );
