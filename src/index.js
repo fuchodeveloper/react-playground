@@ -4,53 +4,14 @@ import './index.css';
 // import App from './r-conditional-rendering/App';
 import App from './App';
 
-
-class Reservation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isGoing: true,
-      numberOfGuests: 2,
-    }
+const BoilingVerdict = (props) => {
+  if (props.celsius >= 100) {
+    return <p>Water would boil</p>
   }
-
-  handleInputChange = event => {
-    const {
-      target, name, type, checked
-    } = event;
-    const value = type === 'checkbox' 
-      ? checked
-      : target.value;
-    this.setState({ [name]: value });
-  }
-
-  render() {
-    return (
-      <form>
-        <label htmlFor="isGoing">
-        Is going: <input 
-          name="isGoing"
-          type="checkbox"
-          checked={this.state.isGoing}
-          onChange={this.handleInputChange}
-        />
-        </label>
-        <br/>
-        <label htmlFor="numberOfGuests">
-          Number of guests:
-          <input
-            name="numberOfGuests"
-            type="number"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange}
-          />
-        </label>
-      </form>
-    )
-  }
+  return <p>Water wouldn't boil.</p>
 }
 
 ReactDOM.render(
-  <Reservation />,
+  <BoilingVerdict />,
   document.getElementById('root')
 );
