@@ -9,19 +9,19 @@ const times10 = (args) => args * 10;
 // protip 1: Create a function that checks if the value for n has been calculated before.
 // protip 2: If the value for n has not been calculated, calculate and then save the result in the cache object.
 
-// const cache = {};
+const cache = {};
 
-// const memoTimes10 = (n) => {
-//   if (n in cache) {
-//     console.log('from cache')
-//     return cache[n];
-//   } else {
-//     console.log('calculated')
-//     let result = times10(n);
-//     cache[n] = result;
-//     return result;
-//   }
-// }
+const memoTimes10 = (n) => {
+  if (n in cache) {
+    console.log('from cache')
+    return cache[n];
+  } else {
+    console.log('calculated')
+    let result = times10(n);
+    cache[n] = result;
+    return result;
+  }
+}
 
 // console.log('~~~~~~~~~~~~~~TASK 2~~~~~~~~~~~~~~');
 // console.log('Task 2 calculated value:', memoTimes10(9));	// calculated
@@ -32,29 +32,55 @@ const times10 = (args) => args * 10;
 
 const memoizedClosureTimes10 = () => {
   const cache = {};
-  const calcFunc = (n, m) => {
-    if ((n in cache) || (m in cache)) {
+  const calcFunc = (n) => {
+    if (n in cache) {
       console.log('from cache');
-      return cache[n] || cache[m];
+      return cache[n];
     } else {
       console.log('calculated')
-      // let result = times10(n);
-      let result = n * m;
+      let result = times10(n);
       cache[n] = result;
-      cache[m] = result;
       return result;
     }
   }
   return calcFunc;
 };
 
-const memoClosureTimes10 = memoizedClosureTimes10();
-console.log('~~~~~~~~~~~~~~TASK 3~~~~~~~~~~~~~~');
-try {
-  console.log('Task 3 calculated value:', memoClosureTimes10(9, 11));	// calculated
-  console.log('Task 3 cached value:', memoClosureTimes10(9, 11));	// cached
-  console.log('Task 3 cached value again:', memoClosureTimes10(9, 11));	// cached
-} catch (e) {
-  console.error('Task 3:', e);
+// const memoClosureTimes10 = memoizedClosureTimes10();
+// console.log('~~~~~~~~~~~~~~TASK 3~~~~~~~~~~~~~~');
+// try {
+//   console.log('Task 3 calculated value:', memoClosureTimes10(9));	// calculated
+//   console.log('Task 3 cached value:', memoClosureTimes10(9));	// cached
+//   console.log('Task 3 cached value again:', memoClosureTimes10(9));	// cached
+// } catch (e) {
+//   console.error('Task 3:', e);
+// }
+
+// Task 4: Make your memo function generic and accept the times10 function as a callback rather than defining the n * 10 logic inside the if/else or pulling it in from the global scope.
+
+// protip: Take advantage of the fact that parameters are saved in the closure as well, just like the cache from the previous example.
+const memoize = (cb) => {
+  const cache = {};
+  const calcFunc = n => {
+    if (n in cache) {
+      console.log('from cache');
+      return cache[n];
+    } else {
+      console.log('calculated');
+      let result = cb(n);
+      cache[n] = result;
+      return result;
+    }
+  }
+  return calcFunc;
 }
 
+// returned function from memoizedAdd
+const memoizedTimes10 = memoize(times10);
+console.log('~~~~~~~~~~~~~~TASK 4~~~~~~~~~~~~~~');
+try {
+  console.log('Task 4 calculated value:', memoizedTimes10(9));	// calculated
+  console.log('Task 4 cached value:', memoizedTimes10(9));	// cached
+} catch (e) {
+  console.error('Task 4:', e)
+}
