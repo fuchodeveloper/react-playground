@@ -1,13 +1,13 @@
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
-body {
+/* body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
-}
+} */
 
-ol, ul {
+/* ol, ul {
   padding-left: 30px;
 }
 
@@ -51,6 +51,11 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+} */
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
 }
 
 .SplitPane {
