@@ -1,13 +1,13 @@
-/* * {
+* {
   box-sizing: border-box;
-} */
+} 
 
-/* body {
+ body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
-} */
+}
 
-/* ol, ul {
+ol, ul {
   padding-left: 30px;
 }
 
@@ -51,38 +51,22 @@
 
 .game-info {
   margin-left: 20px;
-} */
-
-html, body, #root {
-  width: 100%;
-  height: 100%;
 }
 
-.SplitPane {
-  width: 100%;
-  height: 100%;
+.FancyBorder {
+  padding: 10px 10px;
+  border: 10px solid;
 }
 
-.SplitPane-left {
-  float: left;
-  width: 30%;
-  height: 100%;
+.FancyBorder-blue {
+  border-color: blue;
 }
 
-.SplitPane-right {
-  float: left;
-  width: 70%;
-  height: 100%;
+.Dialog-title {
+  margin: 0;
+  font-family: sans-serif;
 }
 
-.Contacts {
-  width: 100%;
-  height: 100%; 
-  background: lightblue;
-}
-
-.Chat {
-  width: 100%;
-  height: 100%; 
-  background: pink;
+.Dialog-message {
+  font-size: larger;
 }
