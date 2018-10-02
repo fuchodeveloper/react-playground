@@ -4,56 +4,67 @@ import './index.css';
 // import App from './r-conditional-rendering/App';
 // import App from './App';
 
-function FancyBorder(props) {
-  return (
-    <div className={'FancyBorder FancyBorder-' + props.color}>
-      {props.children}
-    </div>
-  );
-}
-
-const Dialog = props => (
-  <FancyBorder color="blue">
-    <h1 className="Dialog-title">{props.title}</h1>
-    <p className="Dialog-message">{props.message}</p>
-    {props.children}
-  </FancyBorder>
-)
-
-function WelcomeDialog() {
-  return (
-    <Dialog
-      title="Welcome"
-      message="Thank you for visiting our spacecraft!" />
-  );
-}
-
-class SignUpDialog extends Component {
-  state = {login: ''}
-
+class productCategoryRow extends Component {
   render() {
+    const {category} = this.props;
     return (
-      <Dialog
-        title="Mars Exploration Program"
-        message="How could we refer to you?"
-      >
-        <input 
-          value={this.state.login}
-          onChange={this.handleChange}
-        />
-        <button onClick={this.handleSignUp}>
-          Sign Me Up!
-        </button>
-      </Dialog>
+      <tr>
+        <th colSpan="2">{category}</th>
+      </tr>
     )
   }
+}
 
-  handleChange = e => {
-    this.setState({login: e.target.value});
+class ProductRow extends Component {
+  render() {
+    const {product} = this.props;
+    const name = product.stocked ? 
+      product.name :
+      <span style={{ color: "red" }}>{product.name}</span>
+
+      return (
+        <tr>
+          <td>{name}</td>
+          <td>{product.price}</td>
+        </tr>
+      )
   }
+}
 
-  handleSignUp = () => {
-    console.log(`Welcome aboard, ${this.state.login}!`);
+class ProductTable extends Component {
+  render(){
+    const rows = [];
+    let lastCategory = null;
+
+    this.props.products.forEach(product => {
+      if (product.category !== lastCategory) {
+        rows.push(
+          <productCategoryRow
+            category={product.category}
+            key={product.category}
+          />
+        );
+      }
+      rows.push(
+        <ProductRow
+          product={product}
+          key={product.name}
+        />
+      );
+      lastCategory = product.category;
+    });
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    );
   }
 }
 
