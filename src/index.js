@@ -4,71 +4,61 @@ import './index.css';
 // import App from './r-conditional-rendering/App';
 // import App from './App';
 
-class productCategoryRow extends Component {
+class AccessibleModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {isOpen: false};
+    this.timeOutId = null;
+    this.onClickHandler = this.onClickHandler.bind(this);
+    this.onBlurHandler = this.onBlurHandler.bind(this);
+    this.onFocusHandler = this.onFocusHandler.bind(this);
+  }
+
+  onClickHandler() {
+    this.setState(currentState => ({
+      isOpen: !currentState.isOpen,
+    }));
+  }
+
+  onBlurHandler() {
+    this.timeOutId = setTimeout(() => {
+      this.setState({isOpen: false});
+    })
+  }
+
+  onFocusHandler() {
+    clearTimeout(this.timeOutId);
+  }
+
   render() {
-    const {category} = this.props;
     return (
-      <tr>
-        <th colSpan="2">{category}</th>
-      </tr>
+      <div
+        onBlur={this.onBlurHandler}
+        onFocus={this.onFocusHandler}
+      >
+        <button
+          onClick={this.onClickHandler}
+          aria-haspopup="true"
+          aria-expanded={this.state.isOpen}
+        >
+        Select an option
+        </button>
+        {
+          this.state.isOpen ? (
+            <ul>
+              <li>Option 1</li>
+              <li>Option 2</li>
+              <li>Option 3</li>
+            </ul>
+          ): null
+        }
+      </div>
     )
   }
-}
 
-class ProductRow extends Component {
-  render() {
-    const {product} = this.props;
-    const name = product.stocked ? 
-      product.name :
-      <span style={{ color: "red" }}>{product.name}</span>
-
-      return (
-        <tr>
-          <td>{name}</td>
-          <td>{product.price}</td>
-        </tr>
-      )
-  }
-}
-
-class ProductTable extends Component {
-  render(){
-    const rows = [];
-    let lastCategory = null;
-
-    this.props.products.forEach(product => {
-      if (product.category !== lastCategory) {
-        rows.push(
-          <productCategoryRow
-            category={product.category}
-            key={product.category}
-          />
-        );
-      }
-      rows.push(
-        <ProductRow
-          product={product}
-          key={product.name}
-        />
-      );
-      lastCategory = product.category;
-    });
-
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
-    );
-  }
 }
 
 ReactDOM.render(
-  <SignUpDialog />,
+  <AccessibleModal />,
   document.getElementById('root')
 );
