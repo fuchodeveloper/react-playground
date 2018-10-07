@@ -1,17 +1,23 @@
 <html>
-<head></head>
+<head>
+  <style>
+    .alert {
+      padding: 15px;
+      border: 1px solid #d6e9c6;
+      border-radius: 4px;
+      color: #3c763d;
+      background-color: #dff0d8;
+    }
+  </style>
+</head>
 
 <body>
-  <div id="elem" about="Elephant"></div>
-
   <script>
-    alert(elem.getAttribute('About'));
-    elem.setAttribute('Test', 123);
-    alert(elem.outerHTML);
+    let div = document.createElement('div');
+    div.className = "alert alert-success";
+    div.innerHTML = "<strong>Hi there,</strong> you know this! bangdadadang";
 
-    for (const attr of elem.attributes) {
-      alert(`${elem.attributes.length}`);
-    }
+    document.body.appendChild(div);
   </script>
 </body>
 
