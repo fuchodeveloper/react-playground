@@ -12,29 +12,11 @@
 </head>
 
 <body>
-  <ol id="list">
-    <li>0</li>
-    <li>1</li>
-    <li>2</li>
-  </ol>
+  <div id="first">first</div>
+  <div id="second">second</div>
 
   <script>
-    let div = document.createElement('div');
-    div.className = "alert alert-success";
-    div.innerHTML = "<strong>Hi there,</strong> you know this! bangdadadang";
-
-    list.before('BEFORE');
-    list.after('AFTER');    
-
-    let prepend = document.createElement('li');
-    prepend.innerHTML = 'prepend';
-    list.prepend(prepend);
-
-    let append = document.createElement('li');
-    append.innerHTML = 'append';
-    list.append(append);
-
-    document.body.append(div);
+    second.after(first);
   </script>
 </body>
 
