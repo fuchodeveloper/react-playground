@@ -14,7 +14,8 @@ class Queue {
   * enqueue
   */
   enqueue(value) {
-    this._storage[this._length] = value;
+    const lastIndex = this._length + this._headIndex;
+    this._storage[lastIndex] = value;
     this._length++;
   }
 
@@ -23,7 +24,13 @@ class Queue {
   * @return {*} the first and oldest value in the queue
   */
   dequeue() {
-    return this._storage[0];
+    if (this._length) {
+      const firstVal = this._storage[this._headIndex];
+      delete this._storage[this._headIndex];
+      this._length--;
+      this._headIndex++;
+      return firstVal;
+    }
 
   }
   /*
@@ -31,7 +38,7 @@ class Queue {
   * @return {*} value the first and oldest value in the queue
   */
   peek() {
-
+    return this._storage[this._headIndex];
   }
 }
 
@@ -39,6 +46,9 @@ let queue = new Queue();
 queue.enqueue('first');
 queue.enqueue('second');
 
-// let b = queue.dequeue();
+// queue.dequeue();
+// queue.dequeue();
 
-console.log(queue);
+const b = queue.peek();
+
+console.log(b);

@@ -34,7 +34,6 @@ class Stack {
   */
   peek() {
     return this._storage[this._length - 1];
-
   }
 }
 
