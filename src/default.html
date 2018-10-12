@@ -1,22 +1,40 @@
 <html>
 <head>
   <style>
-    .alert {
-      padding: 15px;
-      border: 1px solid #d6e9c6;
-      border-radius: 4px;
-      color: #3c763d;
-      background-color: #dff0d8;
-    }
+    
   </style>
 </head>
 
 <body class="main page">
 
   <script>
-    console.log(document.body.className);
     
+    let input = {
+      top: 10,
+      right: 10,
+      html: 'Hello!',
+      className: 'welcome'
+    }
+    
+    
+    let showNotification = args => {
+      let div = document.createElement('div');
+      div.className = 'notification';
+      if (className) {
+        div.classList.add(className);
+      }
+
+      div.style.top = args.top + 'px';
+      div.style.right = args.right + 'px';
+      div.innerHTML = args.html;
+      
+      document.body.appendChild(div);
+    }
+
+    // alert(showNotification(input))
+
   </script>
+
 </body>
 
 </html>

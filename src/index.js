@@ -1,13 +1,40 @@
-import React, {Component} from 'react';
+import React, { Component, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './r-conditional-rendering/App';
 // import App from './App';
 
+// could be in a different file
+const { Provider, Consumer } = createContext('blue');
+
+const App = () => {
+  return (
+    <Provider value="white">
+      <ColorPainter />
+    </Provider>
+  );
+};
+
+const ColorPainter = props => {
+  return (
+    <div>
+      <p><Button /></p>
+    </div>
+  )
+};
+
+const Button = props => {
+  return (
+    <Consumer>
+      {color => <ColorButton {...props} color={color} />}
+    </Consumer>
+  )
+}
+
 class AccessibleModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {isOpen: false};
+    this.state = { isOpen: false };
     this.timeOutId = null;
     this.onClickHandler = this.onClickHandler.bind(this);
     this.onBlurHandler = this.onBlurHandler.bind(this);
@@ -22,7 +49,7 @@ class AccessibleModal extends Component {
 
   onBlurHandler() {
     this.timeOutId = setTimeout(() => {
-      this.setState({isOpen: false});
+      this.setState({ isOpen: false });
     })
   }
 
@@ -41,7 +68,7 @@ class AccessibleModal extends Component {
           aria-haspopup="true"
           aria-expanded={this.state.isOpen}
         >
-        Select an option
+          Select an option
         </button>
         {
           this.state.isOpen ? (
@@ -50,7 +77,7 @@ class AccessibleModal extends Component {
               <li>Option 2</li>
               <li>Option 3</li>
             </ul>
-          ): null
+          ) : null
         }
       </div>
     )
