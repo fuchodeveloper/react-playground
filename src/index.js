@@ -2,12 +2,12 @@ import React, { Component, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './r-conditional-rendering/App';
-// import App from './App';
+import App from './context/app';
 
 // could be in a different file
 const { Provider, Consumer } = createContext('blue');
 
-const App = () => {
+const App1 = () => {
   return (
     <Provider value="white">
       <ColorPainter />
@@ -26,7 +26,7 @@ const ColorPainter = props => {
 const Button = props => {
   return (
     <Consumer>
-      {color => <ColorButton {...props} color={color} />}
+      {/* {color => <ColorButton {...props} color={color} />} */}
     </Consumer>
   )
 }
@@ -86,6 +86,6 @@ class AccessibleModal extends Component {
 }
 
 ReactDOM.render(
-  <AccessibleModal />,
+  <App />,
   document.getElementById('root')
 );
