@@ -1,7 +1,13 @@
-import React,  {Component} from 'react';
-import {ThemeContext, themes} from './theme-context';
+import React, {Component} from 'react';
+import {themes} from './theme-context';
 import ThemeButton from './theme-button';
+import ThemeTogglerButton from './theme-toggler-button';
 
+const ThemeContext = React.createContext('light');
+
+const UserContext = React.createContext({
+  name: 'Guest',
+});
 
 const Toolbar = props => {
   return (
@@ -13,36 +19,43 @@ const Toolbar = props => {
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      theme: themes.light
-    };
-
-    this.toggleTheme = () => {
-      this.setState(state => ({
-        theme:
-          state.theme === themes.dark
-            ? themes.light
-            : themes.dark,
-      }));
-    };
-  }
 
   render() {
+    const {signedInUser, theme} = this.props;
+
     return (
-      <Page>
-        <ThemeContext.Provider
-          value={this.state.theme}
-        >
-        <Toolbar changeTheme={this.toggleTheme} />
+        <ThemeContext.Provider value={theme}>
+          <UserContext.Provider value={signedInUser}>
+            <Layout />
+          </UserContext.Provider>
         </ThemeContext.Provider>
-        <Section>
-          <ThemeButton />
-        </Section>
-      </Page>
-    )
+    );
   }
+}
+
+const Layout = () => {
+  return (
+    <div>
+      <Sidebar />
+      <Content />
+    </div>
+  )
+}
+
+const Content = () => {
+  return (
+    <ThemeContext.Consumer>
+      {
+        theme => (
+          <UserContext.Consumer>
+            {user => (
+              <ProfilePage user={user} theme={theme} />
+            )}
+          </UserContext.Consumer>
+        )
+      }
+    </ThemeContext.Consumer>
+  )
 }
 
 export default App;
