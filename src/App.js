@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class App extends Component {
+const ListItem = props => {
+  return <li>{props.value}</li>;
+}
 
-  render() {
-    return (
-      <React.Fragment>
-        <div>App Component</div>
-      </React.Fragment>
-    );
-  }
+const App = props => {
+  const {numbers} = props;
+  const listItems = numbers.map((number) =>
+    <ListItem 
+      key={number.toString()}
+      value={number}
+    />
+  );
+  return (
+    <ul>{listItems}</ul>
+  )
 }
 
 export default App;

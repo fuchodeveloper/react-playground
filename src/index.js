@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { Component, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
-import Parameter from './parameter';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+// import App from './r-conditional-rendering/App';
+import App from './context/app';
 
-const AppWrapper = () => {
-  return (
-    <React.StrictMode>
-      {/* <Parameter /> */}
-      <App />
-    </React.StrictMode >
-  )
+const ListItem = ({value}) => {
+  return <li>{value}</li>;
 }
 
+const NumberList = props => {
+  const {numbers} = props;
+}
 
-ReactDOM.render(<AppWrapper />, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
