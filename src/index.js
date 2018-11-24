@@ -2,15 +2,15 @@ import React, { Component, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './r-conditional-rendering/App';
-import App from './context/app';
+import App from './App';
 
-const ListItem = ({value}) => {
-  return <li>{value}</li>;
-}
+// const ListItem = ({value}) => {
+//   return <li>{value}</li>;
+// }
 
-const NumberList = props => {
-  const {numbers} = props;
-}
+// const NumberList = props => {
+//   const {numbers} = props;
+// }
 
 ReactDOM.render(
   <App />,

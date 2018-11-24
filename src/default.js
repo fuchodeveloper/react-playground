@@ -1,1 +1,1 @@
-// TODO: time complexity example
+console.log(5 % 2)
